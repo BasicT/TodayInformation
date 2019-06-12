@@ -23,6 +23,7 @@ public class SplashActivity extends AppCompatActivity {
         ((FullScreenVideoView) mFullScreenVideoView).setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
+                mp.setVolume(0f,0f);
                 mp.start();
             }
         });
@@ -30,6 +31,7 @@ public class SplashActivity extends AppCompatActivity {
         ((FullScreenVideoView) mFullScreenVideoView).setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
+                mp.setVolume(0f,0f);
                 mp.start();
             }
         });
