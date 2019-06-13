@@ -8,6 +8,7 @@
         style="@style/video_view_style" />
 
     <TextView
+        android:id="@+id/tv_splash_timer"
         android:textColor="@color/color_white"
         android:gravity="center"
         android:layout_width="90dp"
