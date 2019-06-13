@@ -29,6 +29,7 @@ public class CustomCountDown implements Runnable{
                 countDownHandler.onTicker(countDownTimer);
             }
             if (countDownTimer == 0){
+                cancel();
                 countDownHandler.onFinish();
             }else {
                 countDownTimer = time--;
