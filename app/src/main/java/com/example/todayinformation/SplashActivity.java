@@ -52,8 +52,9 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void initTimerPresecter() {
-
-        timerPresenter = new SplashTimerPresenter(this);
+        if (timerPresenter == null){
+            timerPresenter = new SplashTimerPresenter(this);
+        }
         timerPresenter.initTimer();
     }
 
@@ -62,6 +63,7 @@ public class SplashActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                finish();
             }
         });
     }
