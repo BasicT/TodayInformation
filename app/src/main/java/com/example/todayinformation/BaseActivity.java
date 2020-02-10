@@ -4,12 +4,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.todayinformation.mvp.view.LifeCircleMvpActivity;
+
 import butterknife.ButterKnife;
 
 /**
  * Created by shixi on 2019/6/14.
  */
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends LifeCircleMvpActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,7 +20,9 @@ public class BaseActivity extends AppCompatActivity {
             int mainlayoutid = annotation.mainlayoutid();
             if(mainlayoutid > 0){
                 setContentView(mainlayoutid);
-                ButterKnife.bind(this);
+                initBind();
+                afterBindView();
+
             }else {
                 throw new RuntimeException("mainlayoutid < 0");
             }
@@ -26,5 +30,11 @@ public class BaseActivity extends AppCompatActivity {
             throw new RuntimeException("annotation = null");
         }
 
+    }
+
+    public abstract void afterBindView();
+
+    private void initBind() {
+        ButterKnife.bind(this);
     }
 }

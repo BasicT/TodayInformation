@@ -25,6 +25,11 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
     }
 
+    @Override
+    public void afterBindView() {
+
+    }
+
     @OnClick(R.id.main_fab)
     public void onClick() {
     }

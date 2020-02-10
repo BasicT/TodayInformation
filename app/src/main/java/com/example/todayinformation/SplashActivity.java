@@ -4,31 +4,46 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
-import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.widget.TextView;
+
+import com.example.todayinformation.mvp.ISplashActivityContract;
+import com.example.todayinformation.mvp.presenter.SplashTimerPresenter;
 
 import java.io.File;
 
 import butterknife.BindView;
 
 @ViewInject(mainlayoutid = R.layout.activity_splash)
-public class SplashActivity extends BaseActivity {
+public class SplashActivity extends BaseActivity implements ISplashActivityContract.IView {
 
     @BindView(R.id.fsvv_play)
     FullScreenVideoView mFullScreenVideoView;
     @BindView(R.id.tv_splash_timer)
     TextView mTvTimer;
-    SplashTimerPresenter timerPresenter;
+    private ISplashActivityContract.IPresenter timerPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+
+    }
+
+    //模板设计模式
+    @Override
+    public void afterBindView() {
         initListener();
         initVideo();
-        initTimerPresecter();
+        initTimerPresenter();
+    }
 
+    private void initTimerPresenter() {
+        if (timerPresenter == null){
+            timerPresenter = new SplashTimerPresenter(this);
+        }
+        timerPresenter.initTimer();
     }
 
     private void initVideo() {
@@ -51,12 +66,7 @@ public class SplashActivity extends BaseActivity {
         });
     }
 
-    private void initTimerPresecter() {
-        if (timerPresenter == null){
-            timerPresenter = new SplashTimerPresenter(this);
-        }
-        timerPresenter.initTimer();
-    }
+
 
     private void initListener() {
         mTvTimer.setOnClickListener(new View.OnClickListener() {
@@ -69,11 +79,6 @@ public class SplashActivity extends BaseActivity {
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        timerPresenter.cancel();
-    }
-
     public void setTimerText(String s) {
         mTvTimer.setText(s);
     }

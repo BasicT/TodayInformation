@@ -9,9 +9,9 @@ import android.support.annotation.Nullable;
  */
 public interface ILifeCircle {
 
-    void onCreat(Bundle savedInstanceState,Intent intent, Bundle getArguments);
+    void onCreate(Bundle savedInstanceState,Intent intent, Bundle getArguments);
 
-    void onActivityCreat(Bundle savedInstanceState,Intent intent, Bundle getArguments);
+    void onActivityCreated(Bundle savedInstanceState,Intent intent, Bundle getArguments);
 
     void onStart();
 
